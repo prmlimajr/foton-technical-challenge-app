@@ -7,7 +7,7 @@ import {Container, SearchField} from './styles';
 export default function SearchBar() {
   const [search, setSearch] = useState('');
   const [text, onChangeText] = useState("Useless Text");
-console.log({search})
+
   return (    
       <Container>
         <TouchableOpacity>
