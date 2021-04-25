@@ -1,0 +1,18 @@
+background = #fffcf9
+
+background dark = #fff6e5
+
+botão = #FF6978
+
+texto destaque = #FF6978
+
+texto detail = #36383A
+
+texto home = #313131, 80%
+
+ícones tab inactive = #BFBEBF
+
+search = #F0F0F0
+
+search placeholder = #54565A
+
