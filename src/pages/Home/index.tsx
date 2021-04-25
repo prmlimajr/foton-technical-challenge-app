@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {FlatList} from 'react-native';
+import Toast from 'react-native-toast-message';
 import SearchBar from '../../components/SearchBar';
 import api from '../../services/api';
 
@@ -17,33 +18,39 @@ interface BooksProps {
 export default function Home() {
   const navigation = useNavigation();
 
-  const [userName, setUserName] = useState<String>('Paulo Lima')
+  const [userName, setUserName] = useState<String>('Paulo Lima');
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(30);
   const [books, setBooks] = useState<BooksProps[]>([]);
 
   useEffect(() => {
     try {
-      getBooks()
+      getBooks();
     } catch (err) {
-      console.log(err)
-    } finally {
-
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Oops... This is awkward.',
+        text2: 'It looks like we had some problem. Please try again',
+        visibilityTime: 4000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      });
     }
 
-    async function getBooks () {
-      const response = await api.get(`/?page=${page}&perPage=${perPage}`)
+    async function getBooks() {
+      const response = await api.get(`/?page=${page}&perPage=${perPage}`);
 
-      console.log(response.data)
-      setBooks(response.data)
+      setBooks(response.data);
     }
-  }, [])
+  }, []);
   return (
     <Container>
       <SearchBar />
-      
+
       <Greeting>
-        <GreetingText>Hi, </GreetingText> 
+        <GreetingText>Hi, </GreetingText>
         <UserName>{userName} 👋</UserName>
       </Greeting>
 
@@ -51,7 +58,7 @@ export default function Home() {
         data={books}
         keyExtractor={book => book.id}
         renderItem={({item}) => {
-          return <GreetingText>{item.name}</GreetingText>
+          return <GreetingText>{item.name}</GreetingText>;
         }}
       />
     </Container>

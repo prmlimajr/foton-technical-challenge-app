@@ -13,11 +13,11 @@ export const Greeting = styled.View`
 `;
 
 export const GreetingText = styled.Text`
-  color: #54565A;
-  font-size: 24;
+  color: #54565a;
+  font-size: 24px;
 `;
 
 export const UserName = styled.Text`
-  color: #FF6978;
-  font-size: 24;
+  color: #ff6978;
+  font-size: 24px;
 `;
