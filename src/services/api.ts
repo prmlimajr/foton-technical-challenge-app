@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {LOCALHOST, PORT} from '@env';
 
 const api = axios.create({
-  baseURL: 'http://192.168.1.104:3333/',
+  baseURL: `http://${LOCALHOST}:${PORT}/`,
 });
 
 export default api;

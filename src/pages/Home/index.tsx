@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {FlatList} from 'react-native';
 import Toast from 'react-native-toast-message';
 import SearchBar from '../../components/SearchBar';
 import api from '../../services/api';
 
-import {Container, Greeting, GreetingText, UserName} from './styles';
+import {Container, Greeting, GreetingText, UserName, List} from './styles';
+import Book from '../../components/Book';
 
 interface BooksProps {
   id: Number;
@@ -45,6 +45,7 @@ export default function Home() {
       setBooks(response.data);
     }
   }, []);
+
   return (
     <Container>
       <SearchBar />
@@ -54,11 +55,19 @@ export default function Home() {
         <UserName>{userName} 👋</UserName>
       </Greeting>
 
-      <FlatList
+      <List
         data={books}
-        keyExtractor={book => book.id}
-        renderItem={({item}) => {
-          return <GreetingText>{item.name}</GreetingText>;
+        keyExtractor={(book: BooksProps) => book.id}
+        numColumns={3}
+        renderItem={({item}: {item: BooksProps}) => {
+          return (
+            <Book
+              id={item.id}
+              name={item.name}
+              author={item.author}
+              cover={item.cover}
+            />
+          );
         }}
       />
     </Container>

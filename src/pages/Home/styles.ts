@@ -3,7 +3,8 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
   background-color: #fffcf9;
-  padding: 50px 20px;
+  padding: 0 20px;
+  padding-top: 50px;
 `;
 
 export const Greeting = styled.View`
@@ -21,3 +22,7 @@ export const UserName = styled.Text`
   color: #ff6978;
   font-size: 24px;
 `;
+
+export const List = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
