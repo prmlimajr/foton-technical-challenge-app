@@ -61,8 +61,7 @@ export default function Detail() {
     }
   }, []);
 
-  const handleTextToSpeech = () => {
-    setIsListening(!isListening);
+  useEffect(() => {
     if (isListening) {
       Tts.setDefaultLanguage('en-US');
       Tts.setDefaultRate(0.4);
@@ -70,7 +69,7 @@ export default function Detail() {
     } else {
       Tts.stop();
     }
-  };
+  }, [isListening]);
 
   const onShare = () => {
     Share.share({
@@ -102,7 +101,7 @@ export default function Detail() {
 
         <DetailMenu
           onPressSetIsReading={() => setIsReading(() => !isReading)}
-          onPressSetIsListening={() => handleTextToSpeech()}
+          onPressSetIsListening={() => setIsListening(!isListening)}
           onPressShare={() => onShare()}
         />
       </Container>
