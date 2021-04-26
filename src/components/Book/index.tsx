@@ -9,11 +9,18 @@ interface BookProps {
   name: String;
   author: String;
   cover: String;
+  description: String;
 }
 
-export default function Book({id, name, author, cover}: BookProps) {
+export default function Book({
+  id,
+  name,
+  author,
+  cover,
+  description,
+}: BookProps) {
   const navigation = useNavigation();
-
+  console.log({id});
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Detail', id)}>
       <Container>

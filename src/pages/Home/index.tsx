@@ -66,6 +66,7 @@ export default function Home() {
               name={item.name}
               author={item.author}
               cover={item.cover}
+              description={item.description}
             />
           );
         }}
