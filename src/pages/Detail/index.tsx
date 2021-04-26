@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Share} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -71,6 +72,12 @@ export default function Detail() {
     }
   };
 
+  const onShare = () => {
+    Share.share({
+      message: `Share ${book.name}`,
+    });
+  };
+
   return (
     <Background source={isReading ? null : require('../../assets/detail3.png')}>
       <Container>
@@ -96,6 +103,7 @@ export default function Detail() {
         <DetailMenu
           onPressSetIsReading={() => setIsReading(() => !isReading)}
           onPressSetIsListening={() => handleTextToSpeech()}
+          onPressShare={() => onShare()}
         />
       </Container>
     </Background>

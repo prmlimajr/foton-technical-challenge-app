@@ -7,11 +7,13 @@ import {Container, MenuButton, Label, Separator} from './styles';
 interface DetailMenuProps {
   onPressSetIsReading: () => void;
   onPressSetIsListening: () => void;
+  onPressShare: () => void;
 }
 
 export default function DetailMenu({
   onPressSetIsReading,
   onPressSetIsListening,
+  onPressShare,
 }: DetailMenuProps) {
   return (
     <Container elevation={4}>
@@ -31,7 +33,7 @@ export default function DetailMenu({
       </TouchableOpacity>
       <Separator />
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPressShare}>
         <MenuButton>
           <Icon name="share" size={16} color="#CFCBD2" />
           <Label>Share</Label>
