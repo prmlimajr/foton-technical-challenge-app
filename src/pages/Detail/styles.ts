@@ -1,14 +1,16 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   flex: 1;
-  background-color: #fffcf9;
   padding: 0 20px;
   padding-top: 55px;
 `;
 
 export const Background = styled.ImageBackground`
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #fffcf9;
 `;
 
 export const BookCoverDisplay = styled.View`
@@ -44,6 +46,8 @@ export const BookAuthor = styled.Text`
   margin-top: 7px;
   margin-bottom: 10px;
 `;
+
+export const DescriptionArea = styled.ScrollView``;
 
 export const BookDescription = styled.Text`
   font-size: 14px;

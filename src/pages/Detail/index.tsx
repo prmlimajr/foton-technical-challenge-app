@@ -12,8 +12,10 @@ import {
   BookShadow,
   BookTitle,
   BookAuthor,
+  DescriptionArea,
   BookDescription,
 } from './styles';
+import DetailMenu from '../../components/DetailMenu';
 
 interface BookProps {
   id: Number;
@@ -27,6 +29,7 @@ type Params = Number;
 
 export default function Detail() {
   const [book, setBook] = useState({} as BookProps);
+  const [isReading, setIsReading] = useState<boolean>(false);
   const navigation = useNavigation();
   const route = useRoute();
   const id = route.params as Params;
@@ -55,23 +58,31 @@ export default function Detail() {
   }, []);
 
   return (
-    <Container>
-      <Background source={require('../../assets/detail.svg')}>
+    <Background source={isReading ? '' : require('../../assets/detail3.png')}>
+      <Container>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={24} color="#000" />
         </TouchableOpacity>
 
-        <BookCoverDisplay>
-          <BookCover source={{uri: book.cover}} />
-          <BookShadow elevation={10} />
-        </BookCoverDisplay>
+        {!isReading && (
+          <BookCoverDisplay>
+            <BookCover source={{uri: book.cover}} />
+            {book.cover && <BookShadow elevation={10} />}
+          </BookCoverDisplay>
+        )}
 
         <BookTitle>{book.name}</BookTitle>
 
         <BookAuthor>{book.author}</BookAuthor>
 
-        <BookDescription>{book.description}</BookDescription>
-      </Background>
-    </Container>
+        <DescriptionArea>
+          <BookDescription>{book.description}</BookDescription>
+        </DescriptionArea>
+
+        <DetailMenu
+          onPressSetIsReading={() => setIsReading(() => !isReading)}
+        />
+      </Container>
+    </Background>
   );
 }
