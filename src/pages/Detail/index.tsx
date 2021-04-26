@@ -3,6 +3,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
+import Tts from 'react-native-tts';
 import api from '../../services/api';
 import {
   Container,
@@ -30,6 +31,8 @@ type Params = Number;
 export default function Detail() {
   const [book, setBook] = useState({} as BookProps);
   const [isReading, setIsReading] = useState<boolean>(false);
+  const [isListening, setIsListening] = useState<boolean>(false);
+
   const navigation = useNavigation();
   const route = useRoute();
   const id = route.params as Params;
@@ -57,6 +60,17 @@ export default function Detail() {
     }
   }, []);
 
+  const handleTextToSpeech = () => {
+    setIsListening(!isListening);
+    if (isListening) {
+      Tts.setDefaultLanguage('en-US');
+      Tts.setDefaultRate(0.4);
+      Tts.speak(`${book.name}, by ${book.author}. ${book.description}`);
+    } else {
+      Tts.stop();
+    }
+  };
+
   return (
     <Background source={isReading ? null : require('../../assets/detail3.png')}>
       <Container>
@@ -81,6 +95,7 @@ export default function Detail() {
 
         <DetailMenu
           onPressSetIsReading={() => setIsReading(() => !isReading)}
+          onPressSetIsListening={() => handleTextToSpeech()}
         />
       </Container>
     </Background>

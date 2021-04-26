@@ -6,9 +6,13 @@ import {Container, MenuButton, Label, Separator} from './styles';
 
 interface DetailMenuProps {
   onPressSetIsReading: () => void;
+  onPressSetIsListening: () => void;
 }
 
-export default function DetailMenu({onPressSetIsReading}: DetailMenuProps) {
+export default function DetailMenu({
+  onPressSetIsReading,
+  onPressSetIsListening,
+}: DetailMenuProps) {
   return (
     <Container elevation={4}>
       <TouchableOpacity onPress={onPressSetIsReading}>
@@ -19,7 +23,7 @@ export default function DetailMenu({onPressSetIsReading}: DetailMenuProps) {
       </TouchableOpacity>
       <Separator />
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPressSetIsListening}>
         <MenuButton>
           <Icon name="headphones" size={16} color="#CFCBD2" />
           <Label>Listen</Label>
