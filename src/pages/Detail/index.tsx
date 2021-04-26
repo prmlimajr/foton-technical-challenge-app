@@ -58,7 +58,7 @@ export default function Detail() {
   }, []);
 
   return (
-    <Background source={isReading ? '' : require('../../assets/detail3.png')}>
+    <Background source={isReading ? null : require('../../assets/detail3.png')}>
       <Container>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={24} color="#000" />
