@@ -46,6 +46,11 @@ export default function AddBooks() {
           {({handleChange, handleBlur, handleSubmit, values, errors}) => (
             <FormContainer>
               <Label>Name</Label>
+              {errors.name && (
+                <Label style={{fontSize: 10, color: 'red'}}>
+                  {errors.name}
+                </Label>
+              )}
               <Shadow elevation={20} style={styles.shadow}>
                 <Field
                   onChangeText={handleChange('name')}
@@ -53,13 +58,13 @@ export default function AddBooks() {
                   value={values.name}
                 />
               </Shadow>
-              {errors.name && (
-                <Label style={{fontSize: 10, color: 'red'}}>
-                  {errors.name}
-                </Label>
-              )}
 
               <Label>Author</Label>
+              {errors.author && (
+                <Label style={{fontSize: 10, color: 'red'}}>
+                  {errors.author}
+                </Label>
+              )}
               <Shadow elevation={20} style={styles.shadow}>
                 <Field
                   onChangeText={handleChange('author')}
@@ -67,11 +72,6 @@ export default function AddBooks() {
                   value={values.author}
                 />
               </Shadow>
-              {errors.author && (
-                <Label style={{fontSize: 10, color: 'red'}}>
-                  {errors.author}
-                </Label>
-              )}
 
               <Label>Description</Label>
               <Shadow elevation={40} style={styles.shadow}>
