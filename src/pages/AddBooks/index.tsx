@@ -1,8 +1,9 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import {StyleSheet} from 'react-native';
 import * as Yup from 'yup';
-
+import {useBook} from '../../hooks/BookContext';
 import {
   Container,
   Title,
@@ -15,6 +16,7 @@ import {
   ButtonText,
 } from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
+import Toast from 'react-native-toast-message';
 
 interface BookProps {
   name: String;
@@ -30,8 +32,25 @@ const schema = Yup.object().shape({
 });
 
 export default function AddBooks() {
-  const handleSubmit = () => {
-    console.log('click');
+  const {createBook} = useBook();
+  const navigation = useNavigation();
+
+  const handleSubmit = (data: BookProps) => {
+    try {
+      createBook(data);
+      navigation.navigate('Home');
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Oops... This is awkward.',
+        text2: 'It looks like we had some problem. Please try again',
+        visibilityTime: 4000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      });
+    }
   };
 
   return (
@@ -40,7 +59,7 @@ export default function AddBooks() {
         <Title>Add a new book</Title>
 
         <Formik
-          initialValues={{name: '', author: '', description: ''}}
+          initialValues={{name: '', author: '', description: '', cover: ''}}
           onSubmit={values => handleSubmit(values)}
           validationSchema={schema}>
           {({handleChange, handleBlur, handleSubmit, values, errors}) => (

@@ -46,8 +46,27 @@ export const BookProvider = ({children}: ChildrenProps) => {
     }
   }
 
+  async function createBook({name, author, description}: BooksProps) {
+    try {
+      await api.post('/', {name, author, description});
+
+      getBooks({search: '', page: 1, perPage: 15});
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Oops... This is awkward.',
+        text2: 'It looks like we had some problem. Please try again',
+        visibilityTime: 4000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      });
+    }
+  }
+
   return (
-    <BookContext.Provider value={{books, getBooks}}>
+    <BookContext.Provider value={{books, getBooks, createBook}}>
       {children}
     </BookContext.Provider>
   );

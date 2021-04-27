@@ -57,3 +57,10 @@ export const ButtonText = styled.Text`
   font-size: 24px;
   line-height: 29px;
 `;
+
+export const CameraEnabler = styled.TouchableOpacity`
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+`;
