@@ -9,7 +9,7 @@ export default function SearchBar() {
   const {getBooks} = useBook();
 
   useEffect(() => {
-    getBooks({search, page: 1, perPage: 30});
+    getBooks({search, page: 1, perPage: 50});
   }, [search]);
 
   return (

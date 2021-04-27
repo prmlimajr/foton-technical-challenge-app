@@ -28,7 +28,9 @@ interface BookProps {
 const schema = Yup.object().shape({
   name: Yup.string().required('Please inform the name of the book'),
   author: Yup.string().required("Please inform the author's name"),
-  description: Yup.string(),
+  description: Yup.string().required(
+    'Please inform a description for the book',
+  ),
 });
 
 export default function AddBooks() {
@@ -93,6 +95,11 @@ export default function AddBooks() {
               </Shadow>
 
               <Label>Description</Label>
+              {errors.description && (
+                <Label style={{fontSize: 10, color: 'red'}}>
+                  {errors.description}
+                </Label>
+              )}
               <Shadow elevation={40} style={styles.shadow}>
                 <LongTextField
                   multiline={true}

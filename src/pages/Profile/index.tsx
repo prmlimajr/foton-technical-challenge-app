@@ -1,63 +1,60 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
+import {Alert, AsyncStorage, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {RNCamera} from 'react-native-camera';
+  Container,
+  Greeting,
+  Field,
+  Shadow,
+  SubmitButton,
+  ButtonText,
+} from './styles';
 
-export default class Profile extends PureComponent {
-  render() {
-    return (
-      <View style={styles.container}>
-        <RNCamera
-          ref={ref => {
-            this.camera = ref;
-          }}
-          style={{
-            flex: 1,
-            width: '100%',
-          }}></RNCamera>
-        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
-          <TouchableOpacity
-            onPress={this.takePicture.bind(this)}
-            style={styles.capture}>
-            <Text style={{fontSize: 14}}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+export default function Profile() {
+  const [name, setName] = useState<string>('');
+  const navigation = useNavigation();
 
-  takePicture = async () => {
-    if (this.camera) {
-      const options = {quality: 0.5, base64: true};
-      const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri);
+  const handleNameChange = async () => {
+    if (name.trim().length === 0) {
+      Alert.alert("Come on, don't try to fool me.");
+    } else {
+      try {
+        await AsyncStorage.setItem('@NoiaBooks:key', name);
+        navigation.navigate('Home');
+      } catch (err) {
+        Alert.alert('My bad. Try again.');
+      }
     }
   };
+
+  return (
+    <Container>
+      <Greeting>Hi, there!</Greeting>
+
+      <Greeting>Would you be kind and let me know how can I call you?</Greeting>
+
+      <Shadow elevation={20} style={styles.shadow}>
+        <Field onChangeText={setName} />
+      </Shadow>
+
+      <SubmitButton onPress={handleNameChange}>
+        <ButtonText>That's it!</ButtonText>
+      </SubmitButton>
+    </Container>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
+  shadow: {
+    backgroundColor: 'rgb(212, 173, 134)',
+    borderRadius: 10,
+    shadowColor: 'rgb(212, 173, 134)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
   },
 });

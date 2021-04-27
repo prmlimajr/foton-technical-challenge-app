@@ -50,7 +50,7 @@ export const BookProvider = ({children}: ChildrenProps) => {
     try {
       await api.post('/', {name, author, description});
 
-      getBooks({search: '', page: 1, perPage: 15});
+      getBooks({search: '', page: 1, perPage: 50});
     } catch (err) {
       Toast.show({
         type: 'error',

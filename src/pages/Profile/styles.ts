@@ -2,38 +2,19 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fffcf9;
-  padding: 0 20px;
-  padding-top: 53px;
-  padding-bottom: 38px;
+  background-color: #fffcf9;
+  padding: 30px 20px;
+  padding-top: 50px;
+  justify-content: space-between;
 `;
 
-export const Title = styled.Text`
-  color: #ff6978;
+export const Greeting = styled.Text`
+  color: #54565a;
   font-size: 24px;
-  line-height: 29px;
-  font-weight: bold;
-`;
-
-export const FormContainer = styled.View`
-  margin-top: 57px;
-`;
-
-export const Label = styled.Text`
-  font-size: 16px;
-  line-height: 18px;
-  margin-bottom: 10px;
-  font-weight: bold;
 `;
 
 export const Field = styled.TextInput`
   height: 48px;
-  background: #fff;
-  border-radius: 10px;
-`;
-
-export const LongTextField = styled.TextInput`
-  height: 228px;
   background: #fff;
   border-radius: 10px;
 `;
