@@ -34,7 +34,7 @@ const TabRoutes = () => {
         }}
       />
       <Tab.Screen
-        name="AddBooks"
+        name="Add Book"
         component={AddBooks}
         options={{
           tabBarIcon: ({focused}) => {

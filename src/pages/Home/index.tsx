@@ -17,7 +17,6 @@ export default function Home() {
   const [userName, setUserName] = useState<String>('Stranger');
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(15);
-  // const [books, setBooks] = useState<BooksProps[]>([]);
 
   const {books, getBooks} = useBook();
 
